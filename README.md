@@ -1,6 +1,6 @@
 # 🚀 Telebirr API Integration Guide
 
-Integrate **Telebirr** mobile payments quickly and securely using Ethio Telecom's API. This guide covers essential steps for authentication, initiating payments, and handling callbacks in your app.
+Integrate **Telebirr** mobile payments quickly and securely using Ethio Telecom's API. This guide covers essential steps for authentication, initiating payments, and handling callbacks in your app using Js.
 
 ---
 
@@ -21,21 +21,13 @@ Integrate **Telebirr** mobile payments quickly and securely using Ethio Telecom'
 1️⃣ Authenticate
 To begin, generate an accessToken using your credentials. This token is required for all subsequent API requests.
 
-Request:
-
-http
-Copy code
-POST /oauth2/token
+Request:POST /oauth2/token
 Content-Type: application/json
 
 {
   "appId": "your_app_id",
   "appKey": "your_app_key"
 }
-Response:
-
-json
-Copy code
 {
   "accessToken": "your_access_token",
   "expiresIn": 3600
@@ -43,11 +35,7 @@ Copy code
 2️⃣ Initiate Payment
 To create a payment, call the /api/payment/initiate endpoint with transaction details.
 
-Request:
-
-http
-Copy code
-POST /api/payment/initiate
+Request:POST /api/payment/initiate
 Authorization: Bearer your_access_token
 
 {
@@ -58,28 +46,17 @@ Authorization: Bearer your_access_token
   "notifyUrl": "https://your-server.com/callback",
   "returnUrl": "https://your-app.com/complete"
 }
-Key Parameters:
-
-outTradeNo: Unique transaction ID.
-totalAmount: Amount to be paid.
-notifyUrl: URL for Telebirr to notify on payment completion.
-returnUrl: URL to redirect users post-payment.
 3️⃣ Query Payment Status
 To verify a payment’s status, use the outTradeNo from the initiate payment request.
 
 Request:
 
-http
-Copy code
 GET /api/payment/query?outTradeNo=unique_transaction_id
 Authorization: Bearer your_access_token
 4️⃣ Handle Callbacks
 Set up a callback listener at your notifyUrl to process Telebirr’s payment notifications.
 
 Example (Node.js):
-
-javascript
-Copy code
 app.post('/callback', (req, res) => {
   const paymentData = req.body;
   if (paymentData.status === 'SUCCESS') {
@@ -90,8 +67,6 @@ app.post('/callback', (req, res) => {
 🧑‍💻 Example Code (Node.js)
 Here’s a code snippet for authenticating and initiating a payment:
 
-javascript
-Copy code
 const axios = require('axios');
 
 async function authenticate() {
@@ -118,6 +93,3 @@ async function initiatePayment(transactionId, amount) {
   );
   return data;
 }
-🔗 Useful Links
-Ethio Telecom Developer Portal
-Telebirr API Documentation

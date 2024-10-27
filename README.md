@@ -1,4 +1,4 @@
-# 🚀 Telebirr API Integration Guide
+# 🚀 Telebirr API Integration using Javascript Node
 
 Integrate **Telebirr** mobile payments quickly and securely using Ethio Telecom's API. This guide covers essential steps for authentication, initiating payments, and handling callbacks in your app using Js.
 
